@@ -69,7 +69,6 @@ void setup() {
   // Set a tick source so that LVGL will know how much time elapsed.
   lv_tick_set_cb(my_tick);
 
-   
   lv_display_t *disp = lv_tft_espi_create(TFT_WIDTH, TFT_HEIGHT, draw_buf, sizeof(draw_buf));
   lv_display_set_rotation(disp, TFT_ROTATION);
 
