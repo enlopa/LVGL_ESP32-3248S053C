@@ -14,23 +14,39 @@ This repository contains example code demonstrating how to use ESP-323248S035C c
 
 - ESP32 development board.
 - ESP-323248S035C touch screen module.
-- LVGL library integrated into your development environment.
-- Properly configured drivers for ST7796 and GT911.
+- **PlatformIO Libraries**:
+  - `TAMC_GT911`
+  - `lvgl/lvgl@^9.2.2`
+  - `TFT_eSPI`
+- The `platformio.ini` file provided in this repository already includes the required libraries and configurations.
 
-## Setup and Usage
+## Pin Configuration
 
-1. **Hardware Connections**:
-   - Ensure your ESP32 is connected to the ESP-323248S035C module according to the pinout specified by the manufacturer.
-   - Double-check power and ground connections.
+- **TFT Display Pins**:
+  - `TFT_MISO`: GPIO 12
+  - `TFT_MOSI`: GPIO 13
+  - `TFT_SLCK`: GPIO 14
+  - `TFT_CS`: GPIO 15
+  - `TFT_DC`: GPIO 2
+  - `TFT_RST`: -1 (not used)
+  - `TFT_BL`: GPIO 27
 
-2. **Software Configuration**:
-   - Install the [LVGL library](https://lvgl.io/) in your development environment.
-   - Ensure the ST7796 and GT911 drivers are included and properly configured.
-   - Clone this repository and upload the code to your ESP32.
+- **Touch Screen Pins (I2C)**:
+  - `TOUCH_SDA`: GPIO 33
+  - `TOUCH_SCL`: GPIO 32
+  - `TOUCH_INT`: GPIO 21
+  - `TOUCH_RST`: GPIO 25
+  - `TOUCH_CS`: GPIO 33 (required by the `TFT_eSPI` library but not used as this is a capacitive touch screen, accessed via I2C).
 
-3. **Running the Example**:
-   - After powering up the device, you should see a button displayed on the screen.
-   - When you touch the button, its label will change.
+### Pin Configuration File
+
+The pin definitions must be configured in the `User_Setup.h` file located at the following path:
+
+```
+.pio\libdeps\esp32doit-devkit-v1\TFT_eSPI\User_Setup.h
+```
+
+An example configuration file, named `User_Setup.txt`, is provided in this repository. You can copy and rename it to `User_Setup.h` and place it in the specified directory. Ensure that the pin assignments match the ones listed above.
 
 ## How It Works
 
